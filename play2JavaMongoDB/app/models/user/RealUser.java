@@ -7,9 +7,9 @@ import java.util.Date;
  * @author zhy
  */
 public class RealUser {
-	private int 	id;			//ID
-	private String  nick;		//昵称
-	private int 	gener;		//性别
-	private Date    brithday;   //生日
-	private String  head;		//头像
+	private int 	  id;			//ID
+	private String    nick;			//昵称
+	private int 	  gener;		//性别
+	private String    brithday;   	//生日
+	private String    head;			//头像
 }

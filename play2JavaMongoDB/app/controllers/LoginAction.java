@@ -1,14 +1,15 @@
 package controllers;
 
-import org.codehaus.jackson.node.ObjectNode;
-import play.libs.Json;
 import play.mvc.Result;
-import views.html.index;
 
 public class LoginAction extends BaseControler{
-	public static Result index(String deviceCode,String encodeStr) {
-		ObjectNode result = Json.newObject();
-		
-	    return ok(index.render("Your new application is ready."));
+	public static Result index() {
+		if(null!=params){
+			String encodeStr=params.findPath("encodeStr").getTextValue();
+			result.put("encodeStr", encodeStr);
+		}
+		result.put("deviceID", deviceID);
+		result.put("version", version);
+		return ok(result);
 	}
 }
