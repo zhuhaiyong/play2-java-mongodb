@@ -1,4 +1,4 @@
-package models;
+package models.user;
 
 /**
  * 角色用户，是指被真实用户创建出来的

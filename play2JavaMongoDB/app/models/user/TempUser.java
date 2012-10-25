@@ -1,4 +1,4 @@
-package models;
+package models.user;
 
 /**
  * 临时用户，是指没有补充信息或者绑定第三方帐号的用户
