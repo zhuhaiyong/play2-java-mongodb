@@ -34,14 +34,14 @@ public class SeqenceID extends BaseModel{
 	}
 	
 	public static long getAutoIncID(DBCollections collectios){
-		String tb_name=collectios.getCollection();
+		String tb_name=collectios.getColl_name();
 		long id=1l;
 		
 		SeqenceID seqenceID=SeqenceID.findByCollectionName(collectios);
 		if(null==seqenceID){
 			BasicDBObject doc=new BasicDBObject();
 			doc.put("auto_increment", 1);
-			doc.put("coll_name", collectios.getCollection());
+			doc.put("coll_name", collectios.getColl_name());
 			MongoDBManager.insert(DBCollections.SeqenceID, doc);
 		}else{
 			DBObject query = new BasicDBObject();
@@ -49,7 +49,7 @@ public class SeqenceID extends BaseModel{
 	        
 			DBObject update =new BasicDBObject();
 			update.put("$inc", new BasicDBObject().append("auto_increment", 1));
-		    DBObject dbObject = MongoDBManager.findAndModify(collectios,query, update);
+		    DBObject dbObject = MongoDBManager.findAndModify(DBCollections.SeqenceID,query, update);
 		    if(null!=dbObject){
 		    	Gson gson=new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 		    	SeqenceID oldSeqenceID = gson.fromJson(dbObject.toString(), SeqenceID.class);
@@ -62,7 +62,7 @@ public class SeqenceID extends BaseModel{
 	
 	public static SeqenceID findByCollectionName(DBCollections collectios){
 		BasicDBObject query=new BasicDBObject();
-		query.put("coll_name", collectios.getCollection());
+		query.put("coll_name", collectios.getColl_name());
 		DBObject dbObject=MongoDBManager.findOne(DBCollections.SeqenceID,query);
 		SeqenceID seqenceID = null;
 		if(null!=dbObject){

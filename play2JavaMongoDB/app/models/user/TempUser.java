@@ -13,6 +13,17 @@ import com.ruoogle.mongodb.util.MongoDBManager;
  * @author zhy
  */
 public class TempUser extends BaseModel{
+	public static void main(String[] arg){
+		int userid=0;
+		TempUser tempUser=TempUser.findByDeviceID("qqqqqqqq");
+		if(null!=tempUser){
+			userid=tempUser.getId();
+		}else{
+			tempUser=new TempUser(0,"qqqqqqqq");
+			userid=TempUser.insert(tempUser);
+		}
+	}
+	
 	private int 	id;				//临时用户ID
 	private String  deviceid;  //设备code
 
@@ -28,10 +39,10 @@ public class TempUser extends BaseModel{
 	public void setDeviceid(String deviceid) {
 		this.deviceid = deviceid;
 	}
-	private TempUser() {
+	public TempUser() {
 		super();
 	}
-	private TempUser(int id, String deviceid) {
+	public TempUser(int id, String deviceid) {
 		super();
 		this.id = id;
 		this.deviceid = deviceid;

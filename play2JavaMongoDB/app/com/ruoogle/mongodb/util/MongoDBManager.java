@@ -67,7 +67,9 @@ public class MongoDBManager {
 	
 	public static  DBObject findOne(DBCollections collections,DBObject query){
 		DB db=getDb();
-		return db.getCollection(collections.getCollection()).findOne(query);
+		String coll_name=collections.getColl_name();
+		DBCollection coll=db.getCollection(coll_name);
+		return coll.findOne(query);
 	}
 	
 	/**
@@ -79,12 +81,12 @@ public class MongoDBManager {
 	 */
 	public static  DBObject findAndModify(DBCollections collections,DBObject query,DBObject update){
 		DB db=getDb();
-		return db.getCollection(collections.getCollection()).findAndModify(query,null,null,false,update,true,true);
+		return db.getCollection(collections.getColl_name()).findAndModify(query,null,null,false,update,true,true);
 	}
 	
 	public static  WriteResult insert(DBCollections collections,BasicDBObject doc){
 		DB db=getDb();
-		DBCollection coll = db.getCollection(collections.getCollection());
+		DBCollection coll = db.getCollection(collections.getColl_name());
 		WriteResult wr=coll.insert(doc);
 		return wr;
 	}
