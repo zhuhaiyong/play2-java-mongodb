@@ -1,6 +1,7 @@
-package models;
+package models.base;
 
 import org.bson.types.ObjectId;
+
 
 public class BaseModel {
 	public ObjectId _id;

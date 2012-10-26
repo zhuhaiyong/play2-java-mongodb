@@ -1,4 +1,4 @@
-package models;
+package models.base;
 
 import org.codehaus.jackson.node.ObjectNode;
 

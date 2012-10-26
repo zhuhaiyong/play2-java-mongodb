@@ -1,4 +1,4 @@
-package models;
+package models.base;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -12,8 +12,8 @@ import com.ruoogle.mongodb.util.MongoDBManager;
  * 记录数据表中 表对应的自动增长的ID
  * @author zhy
  */
-public class SeqenceID extends BaseModel{
-	private String  coll_name;			//表名
+public class ModelsID extends BaseModel{
+	/*private String  coll_name;			//表名
 	private long 	auto_increment;		//自动增长ID
 	
 	public long getAuto_increment() {
@@ -37,7 +37,7 @@ public class SeqenceID extends BaseModel{
 		String tb_name=collectios.getColl_name();
 		long id=1l;
 		
-		SeqenceID seqenceID=SeqenceID.findByCollectionName(collectios);
+		ModelsID seqenceID=ModelsID.findByCollectionName(collectios);
 		if(null==seqenceID){
 			BasicDBObject doc=new BasicDBObject();
 			doc.put("auto_increment", 1);
@@ -52,7 +52,7 @@ public class SeqenceID extends BaseModel{
 		    DBObject dbObject = MongoDBManager.findAndModify(DBCollections.SeqenceID,query, update);
 		    if(null!=dbObject){
 		    	Gson gson=new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
-		    	SeqenceID oldSeqenceID = gson.fromJson(dbObject.toString(), SeqenceID.class);
+		    	ModelsID oldSeqenceID = gson.fromJson(dbObject.toString(), ModelsID.class);
 		    	id=oldSeqenceID.getAuto_increment();
 		    }
 		}
@@ -60,15 +60,15 @@ public class SeqenceID extends BaseModel{
 	}
 	
 	
-	public static SeqenceID findByCollectionName(DBCollections collectios){
+	public static ModelsID findByCollectionName(DBCollections collectios){
 		BasicDBObject query=new BasicDBObject();
 		query.put("coll_name", collectios.getColl_name());
 		DBObject dbObject=MongoDBManager.findOne(DBCollections.SeqenceID,query);
-		SeqenceID seqenceID = null;
+		ModelsID seqenceID = null;
 		if(null!=dbObject){
 			Gson gson=new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
-			seqenceID = gson.fromJson(dbObject.toString(), SeqenceID.class);
+			seqenceID = gson.fromJson(dbObject.toString(), ModelsID.class);
 		}
 		return seqenceID;
-	}
+	}*/
 }

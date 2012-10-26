@@ -1,17 +1,12 @@
 package com.ruoogle.mongodb.util;
 
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
-
 import play.Logger;
-
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
-import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.Mongo;
 import com.mongodb.DB;
+import com.mongodb.WriteConcern;
 import com.mongodb.WriteResult;
 public class MongoDBManager {
 	private static Mongo m;
@@ -84,6 +79,26 @@ public class MongoDBManager {
 		return db.getCollection(collections.getColl_name()).findAndModify(query,null,null,false,update,true,true);
 	}
 	
+	/**
+	 * 更新数据
+	 * @param q			search query for old object to update
+	 * @param o			object with which to update q
+	 * @param upsert	if the database should create the element if it does not exist
+	 * @param multi		if the update should be applied to all objects matching (db version 1.1.3 and above). An object will not be inserted if it does not exist in the collection and upsert=true and multi=true. See http://www.mongodb.org/display/DOCS/Atomic+Operations
+	 * @param concern	the write concern
+	 * @return
+	 */
+	public static WriteResult update(DBCollections collections,DBObject q,DBObject o,boolean upsert,boolean multi){
+		DB db=getDb();
+		return db.getCollection(collections.getColl_name()).update(q,o,upsert,multi);
+	}
+	
+	/**
+	 * 保存数据
+	 * @param collections
+	 * @param doc
+	 * @return
+	 */
 	public static  WriteResult insert(DBCollections collections,BasicDBObject doc){
 		DB db=getDb();
 		DBCollection coll = db.getCollection(collections.getColl_name());
